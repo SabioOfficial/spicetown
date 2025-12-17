@@ -53,18 +53,6 @@ function saveSetting(value) {
 }
 
 function applySettingsSync() {
-  chrome.storage.local.get(['screenshareMode'], function(result) {
-    let value = result.screenshareMode;
-    if (value !== undefined) {
-      const screenshareModeCheckbox = document.getElementById('screenshare_mode');
-      if (!screenshareModeCheckbox) return;
-
-      screenshareModeCheckbox.checked = value;
-    }
-  })
-}
-
-function applyUISync() {
   function initializeCensor(el) {el.classList.add("api-key-display-secure"); el.classList.add("api-key-display-censored"); el.textContent = "";}
   function applyCensor(el) {el.classList.add("api-key-display-censored"); el.classList.remove("api-key-display-visible"); el.textContent = "";}
   function removeCensor(el, text) {el.classList.remove("api-key-display-censored"); el.classList.add("api-key-display-visible"); el.textContent = text;}
@@ -94,6 +82,18 @@ function applyUISync() {
           removeCensor(apiKeyDisplay, apiKey)
         }
       }, true);
+    }
+  })
+}
+
+function applyUISync() {
+  chrome.storage.local.get(['screenshareMode'], function(result) {
+    let value = result.screenshareMode;
+    if (value !== undefined) {
+      const screenshareModeCheckbox = document.getElementById('screenshare_mode');
+      if (!screenshareModeCheckbox) return;
+
+      screenshareModeCheckbox.checked = value;
     }
   })
 }
