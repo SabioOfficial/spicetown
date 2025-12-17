@@ -9,6 +9,12 @@ function initialize() {
     topCollabDiv.insertAdjacentElement("afterend", spicetownIcon);
   }
 
+  addSpicetownSettings(); // must go BEFORE applySettingsSync()
+  applySettingsSync();
+  applyUISync();
+}
+
+function addSpicetownSettings() {
   const settingsForm = document.querySelector(".settings-form");
   const modalActions = settingsForm.querySelector(".modal__actions");
   const saveBtn = modalActions.querySelector(".modal__actions-close");
@@ -43,9 +49,6 @@ function initialize() {
   saveBtn.addEventListener("click", function() {
     saveSetting(screenshareModeBoxInput.checked);
   });
-
-  applySettingsSync();
-  applyUISync();
 }
 
 function saveSetting(value) {
@@ -76,10 +79,10 @@ function applySettingsSync() {
       apiKeyDisplay.addEventListener('mouseup', () => {
         if (censored) {
           censored = false;
-          applyCensor(apiKeyDisplay)
+          removeCensor(apiKeyDisplay, apiKey)
         } else {
           censored = true;
-          removeCensor(apiKeyDisplay, apiKey)
+          applyCensor(apiKeyDisplay)
         }
       }, true);
     }
