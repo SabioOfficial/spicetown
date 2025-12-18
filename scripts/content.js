@@ -115,8 +115,75 @@ async function addSpicetownSettings() {
   }
   
   // theming menu
-  
-  // TODO: Theming menu :shocked:
+  const sidebarNavList = document.querySelector(".sidebar__nav-list");
+  if (sidebarNavList) {
+    const themesNavItem = document.createElement("ul");
+    themesNavItem.classList.add("sidebar__nav-list");
+    sidebarNavList.appendChild(themesNavItem);
+
+    const themesNavLink = document.createElement("a");
+    themesNavLink.classList.add("sidebar__nav-link");
+    themesNavLink.href = "/themes";
+    themesNavItem.appendChild(themesNavLink);
+
+    const themesNavIconSpan = document.createElement("span");
+    themesNavIconSpan.classList.add("sidebar__nav-icon-wrapper");
+    themesNavIconSpan.ariaHidden = true;
+    themesNavLink.appendChild(themesNavIconSpan);
+
+    const themesNavIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    themesNavIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    themesNavIcon.setAttribute("width", "24");
+    themesNavIcon.setAttribute("height", "24");
+    themesNavIcon.setAttribute("viewBox", "0 0 24 24");
+    themesNavIcon.setAttribute("stroke", "currentColor");
+    themesNavIcon.setAttribute("stroke-width", "2");
+    themesNavIcon.setAttribute("stroke-linecap", "round");
+    themesNavIcon.setAttribute("stroke-linejoin", "round")
+    themesNavIcon.classList.add("sidebar__nav-icon");
+    themesNavIconSpan.appendChild(themesNavIcon);
+
+    const themesNavIconG = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    themesNavIconG.setAttribute("fill", "currentColor");
+    themesNavIcon.appendChild(themesNavIconG);
+
+    const themesNavIconPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    themesNavIconPath.setAttribute("d", "M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z");
+    themesNavIconG.appendChild(themesNavIconPath);
+
+    const themesNavIconCircle1 = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    themesNavIconCircle1.setAttribute("cx", "13.5");
+    themesNavIconCircle1.setAttribute("cy", "6.5");
+    themesNavIconCircle1.setAttribute("r", ".5");
+    themesNavIconCircle1.setAttribute("fill", "none");
+    themesNavIconG.appendChild(themesNavIconCircle1);
+
+    const themesNavIconCircle2 = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    themesNavIconCircle2.setAttribute("cx", "17.5");
+    themesNavIconCircle2.setAttribute("cy", "10.5");
+    themesNavIconCircle2.setAttribute("r", ".5");
+    themesNavIconCircle2.setAttribute("fill", "none");
+    themesNavIconG.appendChild(themesNavIconCircle2);
+
+    const themesNavIconCircle3 = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    themesNavIconCircle3.setAttribute("cx", "6.5");
+    themesNavIconCircle3.setAttribute("cy", "12.5");
+    themesNavIconCircle3.setAttribute("r", ".5");
+    themesNavIconCircle3.setAttribute("fill", "none");
+    themesNavIconG.appendChild(themesNavIconCircle3);
+
+    const themesNavIconCircle4 = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    themesNavIconCircle4.setAttribute("cx", "8.5");
+    themesNavIconCircle4.setAttribute("cy", "7.5");
+    themesNavIconCircle4.setAttribute("r", ".5");
+    themesNavIconCircle4.setAttribute("fill", "none");
+    themesNavIconG.appendChild(themesNavIconCircle4);
+
+    const themesNavLabel = document.createElement("span");
+    themesNavLabel.classList.add("sidebar__nav-label");
+    themesNavLabel.textContent = "Themes";
+    themesNavLink.appendChild(themesNavLabel);
+  }
 }
 
 function addBannerTemplateHint() {
