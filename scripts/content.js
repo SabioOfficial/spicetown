@@ -66,7 +66,7 @@ function addBannerTemplateHint() {
   const bannerTemplateFileUrl = chrome.runtime.getURL("/download/banner-template.png")
 
   const bannerTemplateDownloadHint = document.createElement("a");
-  bannerTemplateDownloadHint.textContent = "Download the banner template.";
+  bannerTemplateDownloadHint.textContent = "View the banner template.";
   bannerTemplateDownloadHint.href = bannerTemplateFileUrl;
   bannerTemplateDownloadHint.target = "_blank";
 
