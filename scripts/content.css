@@ -141,3 +141,32 @@
   padding: 2rem 1rem;
   border: 2px solid var(--color-brown-500);
 }
+
+/* .ruby-modified__proj-create-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-s);
+  width: 100%;
+  min-height: 23rem;
+  height: 100%;
+  border-radius: calc(var(--border-radius) * 1.8);
+  background-color: hsla(7, 30%, 37%, .3);
+  color: var(--color-brown-500);
+  font-family: var(--font-family-jua);
+  font-size: var(--font-size-xl);
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform .2s ease;
+}
+
+.ruby-modified__proj-create-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--mask-url) center / 100% 100% no-repeat;
+  pointer-events: none;
+  z-index: 1;
+} */

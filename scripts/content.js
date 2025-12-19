@@ -292,7 +292,19 @@ function addThemesPage() {
 function applyTheme(themeId) {
   if (themeId === "bg-color-ruby") {
     document.body.style.backgroundColor = "#9B111E";
-    document.body.style.backgroundImage = 'url("'+ chrome.runtime.getURL("/themes/bg-color/ruby.png") + '")'
+    document.body.style.backgroundImage = 'url("'+ chrome.runtime.getURL("/themes/bg-color/ruby/bg.png") + '")'
+    if (document.querySelector(".projects-board__title")) {
+      document.querySelector(".projects-board__title").style.color = "white";
+      document.querySelector(".projects-board__subtitle").style.color = "#d4d4d4ff";
+
+      // TODO | Fix this garbage
+      // const projectsBoardCreateCard = document.querySelector(".projects-board__create-card")
+      // projectsBoardCreateCard.style.color = "#d4d4d4ff";
+      // projectsBoardCreateCard.classList.remove("projects-board__create-card");
+      // projectsBoardCreateCard.classList.add("ruby-modified__proj-create-card");
+      // const imageUrl = chrome.runtime.getURL("/themes/bg-color/ruby/create-project.png");
+      // projectsBoardCreateCard.style.setProperty('--mask-url', `url("${imageUrl}")`);
+    }
   } else {
     document.body.style.backgroundColor = "var(--color-bg-2)";
   }
