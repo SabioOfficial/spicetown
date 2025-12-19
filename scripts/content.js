@@ -1,4 +1,5 @@
 let apiKey = "Wait! We're trying to obtain the API Key for you..."
+const savedBgColor = localStorage.getItem("bg-color-theme");
 
 function initialize() {
   const topCollabDiv = document.querySelector(".top-collab img");
@@ -10,14 +11,18 @@ function initialize() {
 
     topCollabDiv.insertAdjacentElement("afterend", spicetownIcon);
   }
+  
+  if (savedBgColor) {
+    applyTheme(savedBgColor);
+  }
 
   // settings related
   addSpicetownSettings(); // must go BEFORE applySettingsSync()
-  addThemesPage();
   applySettingsSync();
   applyUISync();
 
   // non settings related
+  addThemesPage();
   addBannerTemplateHint();
 }
 
@@ -262,17 +267,34 @@ function addThemesPage() {
       bgColorVanilla: document.getElementById("bg-color-vanilla")
     }
 
+    if (savedBgColor) {
+      const activeOpt = document.getElementById(savedBgColor);
+      if (activeOpt) activeOpt.setAttribute("selected", true);
+    }
+
     for (i = 0; i < el.bgColorOptions.length; i++) {
       el.bgColorOptions[i].addEventListener('click', selectBgColorOption);
     }
 
     function selectBgColorOption(event) {
+      const selectedId = event.currentTarget.id;
       const options = document.querySelectorAll('.themes__div-option--bg-color');
       Array.prototype.forEach.call(options, function (el) {
         el.setAttribute("selected", false);
       });
+      localStorage.setItem("bg-color-theme", selectedId);
       event.currentTarget.setAttribute("selected", true);
+      applyTheme(selectedId);
     }
+  }
+}
+
+function applyTheme(themeId) {
+  if (themeId === "bg-color-ruby") {
+    document.body.style.backgroundColor = "#9B111E";
+    document.body.style.backgroundImage = 'url("'+ chrome.runtime.getURL("/themes/bg-color/ruby.png") + '")'
+  } else {
+    document.body.style.backgroundColor = "var(--color-bg-2)";
   }
 }
 

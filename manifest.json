@@ -30,7 +30,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["images/*.png", "download/*.png"],
+      "resources": ["images/*.png", "download/*.png", "themes/*"],
       "matches": ["<all_urls>"] 
     }
   ]

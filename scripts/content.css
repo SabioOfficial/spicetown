@@ -134,4 +134,10 @@
   box-shadow: var(--shadow);
   background: var(--color-tan-300) url(/assets/landing/hero/hero-bg-59d6bbf0.webp) repeat center center / 1200px;
   cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.themes__div-option[selected="true"] {
+  padding: 2rem 1rem;
+  border: 2px solid var(--color-brown-500);
 }
