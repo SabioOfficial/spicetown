@@ -346,3 +346,18 @@
   background-color: #591212 !important;
   color: #f5d0d0 !important;
 }
+
+.ruby-modified.project-card {
+  background-color: #650a0a !important;
+  border-color: #591212 !important;
+}
+
+.ruby-modified.project-card .project-card__stats > h5 {
+  background-color: #591212 !important;
+  color: #f5d0d0 !important;
+}
+
+.ruby-modified.project-card .project-card__stats svg {
+  filter: drop-shadow(5px 0 0 #591212) drop-shadow(-5px 0 0 #591212) drop-shadow(0 5px 0 #591212) drop-shadow(0 -5px 0 #591212) !important;
+  color: #f5d0d0 !important;
+}
