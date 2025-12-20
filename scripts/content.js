@@ -544,8 +544,10 @@ function applyTheme(themeId) {
     }
     if (document.querySelector(".sidebar__blob")) {
       document.querySelector(".sidebar__blob").style.backgroundColor = "#91101dff";
-      document.querySelector(".sidebar__nav-link--active").classList.add("ruby-modified");
-      document.querySelector(".sidebar__nav-link--active > .sidebar__nav-icon-wrapper").style.background = "#7c0b16ff";
+      if (document.querySelector(".sidebar__nav-link--active")) {
+        document.querySelector(".sidebar__nav-link--active").classList.add("ruby-modified");
+        document.querySelector(".sidebar__nav-link--active > .sidebar__nav-icon-wrapper").style.background = "#7c0b16ff";
+      }
     }
     if (document.querySelector(".kitchen-setup")) {
       document.querySelector(".kitchen-setup").classList.add("ruby-modified");
