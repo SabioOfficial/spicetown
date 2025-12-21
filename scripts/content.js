@@ -72,7 +72,7 @@ function addExtraProjectInfo() {
         </clipPath>
       </defs>
     </svg>
-    <p>${Math.round(hoursPerDevlog)} minutes / devlog <span class="project-extra-info__rating" id="devlogs-per-hr-span">(?)</span></p>
+    <p>A devlog for every ${Math.round(hoursPerDevlog)} minutes <span class="project-extra-info__rating" id="devlogs-per-hr-span">(?)</span></p>
   `
   projectExtraInfoDiv.appendChild(projectDevlogsPerHrDiv);
   const devlogsPerHrSpan = document.getElementById("devlogs-per-hr-span");
@@ -122,7 +122,7 @@ function addExtraProjectInfo() {
         <path d="M336.014 402.2C336.004 403.063 336 403.936 336 404.821V449.979C336 459.357 336.492 467.466 338.005 474.275C339.539 481.18 342.234 487.251 346.991 492.009C351.749 496.766 357.82 499.461 364.725 500.995C371.534 502.509 379.643 503 389.021 503H450.979C460.357 503 468.466 502.509 475.275 500.995C482.18 499.461 488.251 496.766 493.009 492.009C497.766 487.251 500.461 481.18 501.995 474.275C503.509 467.466 504 459.357 504 449.979V404.821C504 403.936 503.996 403.063 503.987 402.2H336.014Z" fill="currentColor"/>
         <path d="M361.199 354.715V343.4C361.199 338.761 364.96 335 369.599 335C374.238 335 377.999 338.761 377.999 343.4V352.092C381.453 351.885 385.127 351.8 389.02 351.8H450.978C454.872 351.8 458.546 351.885 461.999 352.092V343.4C461.999 338.761 465.76 335 470.399 335C475.038 335 478.799 338.761 478.799 343.4V354.715C484.252 356.339 489.077 358.861 493.008 362.791C497.766 367.549 500.46 373.62 501.994 380.525C502.34 382.082 502.633 383.707 502.879 385.4H337.12C337.365 383.707 337.658 382.082 338.004 380.525C339.538 373.62 342.233 367.549 346.99 362.791C350.921 358.861 355.747 356.339 361.199 354.715Z" fill="currentColor"/>
       </svg>
-      <p>${projectTimePerDayFormatted + "<span style='font-size: 0.9rem'> (HH:MM)</span>"} / day <span class="project-extra-info__rating" id="project-time-per-day-span">(?)</span></p>
+      <p>${projectTimePerDayFormatted} hours a day <span class="project-extra-info__rating" id="project-time-per-day-span">(?)</span></p>
     `
     projectExtraInfoDiv.appendChild(projectTimePerDayDiv);
     const timePerDaySpan = document.getElementById("project-time-per-day-span");
