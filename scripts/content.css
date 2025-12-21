@@ -356,6 +356,7 @@
   background-color: var(--surface-dark) !important;
   border-color: var(--border-color) !important;
 }
+[data-theme] .explore__nav-component.selected {background-color: var(--border-color);}
 
 [data-theme] .post::after {background-color: var(--surface-dark) !important; border-color: var(--border-color) !important;}
 [data-theme] .post .post__attachment,
@@ -377,7 +378,7 @@
 [data-theme] .projects-board__subtitle {color: var(--text-primary) !important};
 
 [data-theme] .projects-board__create-card {
-  background-color: ''; /* fucks your default rendering shit */
+  background-color: ''; /* fucks your default bs */
 }
 [data-theme] .projects-board__create-card {
   background-color: var(--accent-semi-transparent) !important;
@@ -405,7 +406,7 @@
 [data-theme] .projects-new__card .input-group::before,
 [data-theme] .projects-new__card .hackatime-project-selector::before,
 [data-theme] .projects-new__card .hackatime-project-selector__label,
-[data-theme] .projects-new__card .input-group__label { background-color: var(--input-main-bg) !important; }
+[data-theme] .projects-new__card .input-group__label {background-color: var(--input-main-bg) !important;}
 
 [data-theme] .projects-new__card .input-group__subtitle,
 [data-theme] .projects-new__card .hackatime-project-selector__subtitle { 
@@ -413,14 +414,42 @@
   color: var(--input-sub-text) !important; 
 }
 
-[data-theme] .projects-new__card .input__icon { background-color: var(--input-sub-bg) !important; }
+[data-theme] .projects-new__card .input__icon {background-color: var(--input-sub-bg) !important;}
 
 [data-theme] .projects-new__card .file-upload__dropzone {
   --file-upload-border-color: var(--accent) !important;
   --file-upload-background: var(--border-color) !important;
 }
 [data-theme] .projects-new__card .file-upload__headline, 
-[data-theme] .projects-new__card .file-upload__hint { color: var(--text-highlight) !important; }
+[data-theme] .projects-new__card .file-upload__hint,
+[data-theme] .project-card__content p:not(.project-card__description),
+[data-theme] .project-card__content .project-card__title-link,
+[data-theme] .project-show-card__byline,
+[data-theme] .project-show-card__stat > span,
+[data-theme] .project-show-card__stat > svg {color: var(--text-highlight) !important;}
+[data-theme] .projects-board__header > .btn.btn--red,
+[data-theme] .projects-show__container > .mt-4 > .btn.btn--brown {
+  background-color: var(--accent) !important;
+  color: var(--text-highlight) !important;
+  border-color: var(--border-color) !important;
+}
+[data-theme] .project-card__stats > h5 {
+  background-color: var(--text-highlight) !important;
+  color: var(--border-color) !important;
+}
+[data-theme] .project-card__stats .project-card__stats-icon {
+  color: var(--border-color) !important;
+  filter: drop-shadow(5px 0 0 var(--text-highlight)) drop-shadow(-5px 0 0 var(--text-highlight)) drop-shadow(0 5px 0 var(--text-highlight)) drop-shadow(0 -5px 0 var(--text-highlight)) !important;
+}
+[data-theme] .project-show-card__title-text {
+  color: var(--accent) !important;
+}
+[data-theme] .project-extra-info__container > svg {
+  color: var(--text-highlight) !important;
+}
+[data-theme] .project-show-card__actions > .btn.btn--brown.btn--borderless {
+  color: var(--text-highlight) !important;
+}
 
 [data-theme] .state-card--success {
   --state-card-accent: var(--accent-darker) !important;
