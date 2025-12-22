@@ -285,6 +285,7 @@
   --input-sub-text: hsl(0deg 49.1% 83.27%);
 
   --create-project-url: url("https://i.ibb.co/0RB40Sgg/aaa-1x.webp");
+  --projects-show-timeline-url: url('data:image/svg+xml,<svg width="8" height="90" viewBox="0 0 4 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="4" height="30" rx="2" fill="%23be0a1cff"/></svg>');
 }
 
 /** catppuccin MOCHA THEME **/
@@ -314,6 +315,7 @@
   --input-sub-text: #bac2de;
 
   --create-project-url: url("https://i.ibb.co/V04Z5R31/Mask-group-10.png");
+  --projects-show-timeline-url: url('data:image/svg+xml,<svg width="8" height="90" viewBox="0 0 4 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="4" height="30" rx="2" fill="%237ca6e9"/></svg>');
 }
 
 /** catppuccin MACCHIATO THEME **/
@@ -343,6 +345,7 @@
   --input-sub-text: #b8c0e0;
 
   --create-project-url: url("https://i.ibb.co/V04Z5R31/Mask-group-10.png");
+  --projects-show-timeline-url: url('data:image/svg+xml,<svg width="8" height="90" viewBox="0 0 4 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="4" height="30" rx="2" fill="%23b88bee"/></svg>');
 }
 
 [data-theme] {
@@ -400,32 +403,22 @@
 [data-theme] .project-show-card .project-extra-info__div {
   background-color: var(--border-color) !important;
 }
-
 [data-theme] .post .comment-form__input,
-[data-theme] .post .comments-section__list {
-  color: var(--text-highlight) !important;
-}
+[data-theme] .post .comments-section__list {color: var(--text-highlight) !important;}
+[data-theme] .post .comment-form__input::placeholder {color: var(--text-primary) !important; opacity: 0.5;}
 
 [data-theme] .projects-board__title {color: var(--text-highlight) !important};
 [data-theme] .projects-board__subtitle {color: var(--text-primary) !important};
 
-[data-theme] .projects-board__create-card {
-  background-color: ''; /* fucks your default bs */
-}
-[data-theme] .projects-board__create-card {
-  background-color: var(--accent-semi-transparent) !important;
-}
-[data-theme] .projects-board__create-card::before {
-  background: var(--create-project-url) center / 100% 100% no-repeat !important;
-}
+[data-theme] .projects-board__create-card {background-color: ''; /* fucks your default bs */}
+[data-theme] .projects-board__create-card {background-color: var(--accent-semi-transparent) !important;}
+[data-theme] .projects-board__create-card::before {background: var(--create-project-url) center / 100% 100% no-repeat !important;}
 
 [data-theme] .project-card__stats svg,
 [data-theme] .projects-board__create-card > svg,
 [data-theme] .post .comment-delete,
 [data-theme] .projects-show__admin-actions svg,
-[data-theme] .projects-board__create-card > span {
-  color: var(--text-highlight) !important;
-}
+[data-theme] .projects-board__create-card > span {color: var(--text-highlight) !important;}
 
 [data-theme] .projects-new__card .projects-new__field > .input {
   --input-bg: var(--input-main-bg) !important;
@@ -465,6 +458,10 @@
   color: var(--text-highlight) !important;
   border-color: var(--border-color) !important;
 }
+[data-theme] .project-show-card__stat.project-show-card__stat--clickable {text-decoration-color: var(--accent) !important;}
+[data-theme] .project-show-card__banner.project-card__banner > .project-card__banner-frame {background-color: var(--accent) !important;}
+[data-theme] .project-show-card__banner.project-card__banner > .project-card__banner-frame.project-card__banner-frame > .project-card__banner-frame--placeholder {background: linear-gradient(135deg, var(--accent), var(--accent-darker)) !important;}
+
 [data-theme] .project-card__stats > h5 {
   background-color: var(--text-highlight) !important;
   color: var(--border-color) !important;
@@ -481,6 +478,9 @@
 }
 [data-theme] .project-show-card__actions > .btn.btn--brown.btn--borderless {
   color: var(--text-highlight) !important;
+}
+[data-theme] .projects-show__timeline::before {
+  background-image: var(--projects-show-timeline-url) !important;
 }
 [data-theme] .state-card--success {
   --state-card-accent: var(--accent-darker) !important;
@@ -595,4 +595,21 @@
 [data-theme] .themes__div-option[selected="true"] {
   padding: 2rem 1rem;
   border-color: var(--border-color) !important;
+}
+
+.warning__div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 4px dashed var(--color-tan-400);
+  border-radius: 12px;
+  background: var(--color-brown-500);
+  margin-bottom: 2rem;
+  padding: 2rem 8rem;
+  color: var(--color-bg);
+}
+[data-theme] .warning__div {
+  border-color: var(--border-color);
+  background-color: var(--bg-primary);
+  color: var(--accent);
 }

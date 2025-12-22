@@ -25,6 +25,8 @@ function initialize() {
   addThemesPage();
   addBannerTemplateHint();
 
+  fuckCompetition();
+
   if (savedBgColor) {
     applyTheme(savedBgColor);
   }
@@ -564,6 +566,19 @@ function addBannerTemplateHint() {
   bannerTemplateDownloadHint.target = "_blank";
 
   bannerInputSubtitle.appendChild(bannerTemplateDownloadHint);
+}
+
+function fuckCompetition() {
+  if (location.pathname != "/projects/135" || !document.querySelector(".projects-show")) return;
+  const warningDiv = document.createElement("div");
+  warningDiv.classList.add("warning__div");
+  document.querySelector(".projects-show").insertBefore(warningDiv, document.querySelector(".projects-show__container"));
+  const warningHeading = document.createElement("h3");
+  warningHeading.textContent = "Warning!";
+  warningDiv.appendChild(warningHeading);
+  const warningDescription = document.createElement("p");
+  warningDescription.textContent = "This extension may be incompatiable with Spicetown. If there is a feature from this extension specifically that you would love Spicetown to have, feel free to let us know at #spicetown on Slack! Happy Flavortowning!";
+  warningDiv.appendChild(warningDescription);
 }
 
 function saveSetting(value) {
