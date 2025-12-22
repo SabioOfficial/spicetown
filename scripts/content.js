@@ -373,6 +373,10 @@ function addImprovedShop() {
     shopGoalsDiv.appendChild(shopGoalEditorDiv);
   }
 
+  document.querySelectorAll(".shop-item-card__star").forEach(btn => {
+    btn.addEventListener("click", () => {window.location.reload();});
+  });
+
   calculateAllProgress();
 }
 
