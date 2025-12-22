@@ -532,19 +532,13 @@
   background-color: var(--input-main-bg) !important;
   color: var(--input-sub-text) !important;
 }
-[data-theme] .shop__searchbar .input__field::placeholder {
-  color: var(--accent) !important;
-}
+[data-theme] .shop__searchbar .input__field::placeholder {color: var(--text-primary) !important;}
 [data-theme] .shop__searchbar .input__icon {
   background: var(--input-main-bg) !important;
   color: var(--input-sub-text) !important;
 }
-[data-theme] .shop__searchbar .input__control:focus-within {
-  outline: 4px solid var(--accent) !important;
-}
-[data-theme] .shop__searchbar .input__icon > svg path {
-  fill: var(--input-sub-text) !important;
-}
+[data-theme] .shop__searchbar .input__control:focus-within {outline: 4px solid var(--accent) !important;}
+[data-theme] .shop__searchbar .input__icon > svg path {fill: var(--input-sub-text) !important;}
 [data-theme] .shop__filters .dropdown > .dropdown__label,
 [data-theme] .shop__buttons .dropdown > .dropdown__label {
   color: var(--text-highlight) !important;
