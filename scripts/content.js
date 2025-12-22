@@ -45,6 +45,43 @@ function addImprovedUI() {
     voteActionsDiv.appendChild(previousVotesBtn);
     voteActionsDiv.appendChild(refreshVotesBtn);
   }
+
+  const sidebarAside = document.querySelector("aside.sidebar")
+  if (sidebarAside) {
+    chrome.storage.local.get(["sidebarPinned"], (result) => {
+      const pinSidebarBtn = document.createElement("button");
+      pinSidebarBtn.classList.add("pin-sidebar__btn");
+      pinSidebarBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="var(--color-red-300)" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pin-icon lucide-pin">
+          <path d="M12 17v5"/><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/>
+        </svg>
+      `;
+
+      let pinned = result.sidebarPinned || false;
+      if (pinned) {
+        sidebarAside.classList.add("pinned");
+        sidebarAside.style.width = "var(--sidebar-expanded-width)";
+        pinSidebarBtn.querySelector("svg").style.fill = "var(--color-red-400)";
+      }
+
+      pinSidebarBtn.addEventListener("click", () => {
+        pinned = !pinned;
+        if (pinned) {
+          sidebarAside.classList.add("pinned");
+          sidebarAside.style.width = "var(--sidebar-expanded-width)";
+          pinSidebarBtn.querySelector("svg").style.fill = "var(--color-red-400)";
+        } else {
+          sidebarAside.classList.remove("pinned");
+          sidebarAside.style.width = "";
+          pinSidebarBtn.querySelector("svg").style.fill = "var(--color-red-300)";
+        }
+
+        chrome.storage.local.set({sidebarPinned: pinned});
+      });
+
+      sidebarAside.appendChild(pinSidebarBtn);
+    })
+  }
 }
 
 function addExtraProjectInfo() {

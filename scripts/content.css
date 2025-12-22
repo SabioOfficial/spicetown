@@ -258,6 +258,43 @@
   padding: 0 1rem;
 }
 
+.pin-sidebar__btn {
+  position: absolute;
+  top: 1em;
+  right: -0.5rem;
+  background: none;
+  border: none;
+  rotate: 45deg;
+  cursor: pointer;
+  color: var(--color-red-400);
+}
+
+.sidebar:hover,
+.sidebar:focus-within,
+.sidebar.pinned {width: var(--sidebar-expanded-width);}
+.sidebar:is(:hover, :focus-within) .sidebar__nav-label,
+.sidebar.pinned .sidebar__nav-label {
+  opacity: 1;
+  max-width: 240px;
+  margin-left: var(--space-s);
+}
+.sidebar:is(:hover,:focus-within) .sidebar__nav-link--active::before, .sidebar.pinned .sidebar__nav-link--active::before {width: 140%;}
+.sidebar:hover .sidebar__user-details,
+.sidebar:focus-within .sidebar__user-details,
+.sidebar.pinned .sidebar__user-details {
+  opacity: 1;
+  max-width: 200px;
+}
+.sidebar:hover .sidebar__user-card,
+.sidebar:focus-within .sidebar__user-card,
+.sidebar.pinned .sidebar__user-card {padding: .4em 0 .4em 5.5em;}
+.sidebar:hover .sidebar__user-avatar,
+.sidebar:focus-within .sidebar__user-avatar,
+.sidebar.pinned .sidebar__user-avatar {
+  left: .7em;
+  transform: none;
+}
+
 /* .user-profile__achievements {
   overflow-x: scroll;
 } */
@@ -464,7 +501,8 @@
 }
 [data-theme] .project-show-card__stat.project-show-card__stat--clickable {text-decoration-color: var(--accent) !important;}
 [data-theme] .project-show-card__banner.project-card__banner > .project-card__banner-frame {background-color: var(--accent) !important;}
-[data-theme] .project-show-card__banner.project-card__banner > .project-card__banner-frame.project-card__banner-frame > .project-card__banner-frame--placeholder {background: linear-gradient(135deg, var(--accent), var(--accent-darker)) !important;}
+[data-theme] .project-card__banner-frame.project-card__banner-frame > .project-card__banner-frame--placeholder,
+[data-theme] .project-card__banner.project-card__banner--placeholder > .project-card__banner-frame.project-card__banner-frame--placeholder {background: linear-gradient(135deg, var(--accent), var(--accent-darker)) !important;}
 
 [data-theme] .project-extra-info__rating {color: var(--text-primary);}
 [data-theme] .project-card__stats > h5 {
