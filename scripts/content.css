@@ -258,6 +258,10 @@
   padding: 0 1rem;
 }
 
+/* .user-profile__achievements {
+  overflow-x: scroll;
+} */
+
 /** RUBY THEME **/
 
 [data-theme="bg-color-ruby"] {
@@ -579,6 +583,27 @@
 [data-theme] .shop-goals__container {
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-darker) 100%) !important;
   border-color: var(--border-color) !important;
+}
+[data-theme] .user-profile .user-profile__card {
+  background-color: var(--surface-dark) !important;
+}
+[data-theme] .user-profile__identity h1,
+[data-theme] .user-profile__stats h4,
+[data-theme] .user-profile__stats h3,
+[data-theme] .user-profile__time h4,
+[data-theme] .user-profile__card h2,
+[data-theme] .user-profile__project-stats > .user-profile__project-card-title h3,
+[data-theme] .user-profile__project-stats > div:not(.user-profile__project-card-title),
+[data-theme] .user-profile__achievement .user-profile__achievement-title,
+[data-theme] .user-profile__achievement .user-profile__achievement-icon > svg {color: var(--text-highlight) !important;}
+[data-theme] .user-profile__heading {color: var(--text-primary) !important;}
+[data-theme] .user-profile__achievement {
+  background-color: var(--surface-dark) !important;
+  border-color: var(--border-color) !important;
+}
+[data-theme] .user-profile__project-card {transition: all 300ms ease;}
+[data-theme] .user-profile__project-card:hover {
+  background-color: var(--surface-header) !important;
 }
 
 [data-theme] .themes__div-container {color: var(--text-highlight);}
