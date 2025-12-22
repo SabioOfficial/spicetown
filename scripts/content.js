@@ -154,9 +154,18 @@ function addImprovedShop() {
   const shopGoalsItems = document.querySelectorAll(".shop-goals__item");
   if (!shopGoalsItems) return;
 
-  const shopItemLink = document.querySelectorAll(".shop-item-card__link");
-  shopItemLink.forEach(linkEl => {
-    linkEl.target = "_blank";
+  document // thanks gizzy for this amazing code (now it's mine :3)
+    .querySelectorAll('a.shop-item-card__link[data-turbo-frame="_top"]')
+    .forEach((a) => {
+      a.removeAttribute("data-turbo-frame")
+      a.addEventListener(
+        "click",
+        (e) => {
+          e.preventDefault();
+          window.location.href = a.href;
+        },
+        { once: true },
+      );
   });
 
   const sidebarBalance = document.querySelector(".sidebar__user-balance");
