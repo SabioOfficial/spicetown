@@ -267,18 +267,35 @@ function addImprovedShop() {
       const id = item.getAttribute("data-item-id");
       const progressTxt = item.querySelector(".shop-goals__progress-text");
       const fill = item.querySelector(".shop-goals__progress-fill");
+      const itemName = item.querySelector(".shop-goals__name").textContent;
       
       const remaining = parseFloat(progressTxt.textContent.replace(/[^\d.]/g, '')) || 0;
       const isComplete = fill.style.width === "100%";
-      const pricePerUnit = isComplete ? userBalance : (remaining + userBalance);
+
+      let derivedPrice = 0;
+
+      const matchingShopItemCard = document.querySelector(`div.shop-item-card[data-shop-id="${id}"]`);
+      if (matchingShopItemCard) {
+        const priceTextRaw = matchingShopItemCard.querySelector(".shop-item-card__price").textContent || "🍪 0";
+        derivedPrice = parseFloat(priceTextRaw.replace(/[^\d.]/g, ''));
+      }
+
+      if (!derivedPrice) {
+        if (isComplete) {
+          console.warn(`cannot calculate price for completed shop item ${itemName} fuck; im defaulting to 0`);
+          derivedPrice = 0;
+        } else {
+          derivedPrice = remaining + userBalance;
+        }
+      }
 
       const storage = await chrome.storage.local.get([`shop_goal_qty_${id}`]);
       const qty = storage[`shop_goal_qty_${id}`] || 1;
 
-      totalRequiredCost += (pricePerUnit * qty);
+      totalRequiredCost += (derivedPrice * qty);
     }
     
-    const percent = Math.min(100, (userBalance / totalRequiredCost) * 100);
+    const percent = totalRequiredCost === 0 ? 100 : Math.min(100, (userBalance / totalRequiredCost) * 100);
     if (allFill) allFill.style.width = `${percent}%`;
     if (allCurrentText) allCurrentText.textContent = Math.floor(userBalance).toLocaleString();
     if (allTotalText) allTotalText.textContent = Math.floor(totalRequiredCost).toLocaleString();
@@ -293,7 +310,25 @@ function addImprovedShop() {
 
     const currentRemaining = parseFloat(shopGoalsProgressTxt.textContent.replace(/[^\d.]/g, '')) || 0;
     const isComplete = shopGoalsProgressBarFill.style.width === "100%";
-    const pricePerUnit = isComplete ? (userBalance) : (currentRemaining + userBalance);
+    
+    let derivedPrice = 0;
+    const matchingShopItemCard = document.querySelector(`div.shop-item-card[data-shop-id="${shopGoalItemID}"]`);
+
+    if (matchingShopItemCard) {
+      const priceTextRaw = matchingShopItemCard.querySelector(".shop-item-card__price").textContent || "🍪 0";
+      derivedPrice = parseFloat(priceTextRaw.replace(/[^\d.]/g, ''));
+    }
+
+    if (!derivedPrice) {
+      if (isComplete) {
+        console.warn(`cannot calculate price for completed shop item ${itemName} fuck; im defaulting to 0`);
+        derivedPrice = 0;
+      } else {
+        derivedPrice = currentRemaining + userBalance;
+      }
+    }
+
+    const pricePerUnit = derivedPrice;
 
     const updateShopItemPrice = (quantity) => {
       const newTotalRequired = pricePerUnit * quantity;
@@ -345,9 +380,10 @@ function addImprovedShop() {
     const newQuantity = parseInt(editorInput.value) || 1;
 
     chrome.storage.local.set({[`shop_goal_qty_${activeEditingItem.id}`]: newQuantity}, () => {
-      window.location.reload();
       activeEditingItem.updateShopItemPrice(newQuantity);
       calculateAllProgress();
+
+      shopGoalEditorDiv.style.display = "none";
     });
   });
 
