@@ -25,7 +25,7 @@ function initialize() {
   addThemesPage();
   addBannerTemplateHint();
 
-  fuckCompetition();
+  incompatiability();
 
   if (savedBgColor) {
     applyTheme(savedBgColor);
@@ -777,7 +777,7 @@ async function addThemesPage() {
               <p class="themes__div-option-name">Catppuccin Macchiato [⚠️ WIP]</p>
             </div>
             <div class="themes__div-option themes__div-option--bg-color" name="bg-color-option" id="bg-color-charcoal">
-              <p class="themes__div-option-name">Charcoal</p>
+              <p class="themes__div-option-name">Charcoal <small>(by Aperaine)</small></p>
             </div>
           <div>
         </div>
@@ -865,7 +865,7 @@ function addBannerTemplateHint() {
   bannerInputSubtitle.appendChild(bannerTemplateDownloadHint);
 }
 
-function fuckCompetition() {
+function incompatiability() {
   if (location.pathname != "/projects/135" || !document.querySelector(".projects-show")) return;
   const warningDiv = document.createElement("div");
   warningDiv.classList.add("warning__div");
