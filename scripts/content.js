@@ -763,7 +763,7 @@ function applyTheme(themeId) {
     body.setAttribute("data-theme", themeId);
 
     if (themeId === "bg-color-ruby") {
-      const bgUrl = chrome.runtime.getURL("/themes/bg-color/ruby/bg.png");
+      var bgUrl = chrome.runtime.getURL("/themes/bg-color/ruby/bg.png");
       body.style.setProperty("--theme-bg-image", `url('${bgUrl}')`);
       if (document.querySelector(".sidebar__user-avatar-hat-bg")) {
         document.querySelector(".sidebar__user-avatar-hat-bg").src = "https://i.ibb.co/YBF6TqZ0/Mask-group-19.png";
@@ -779,10 +779,10 @@ function applyTheme(themeId) {
         document.querySelector(".sidebar__user-avatar-hat-bg").src = "https://i.ibb.co/zhK0H9KW/Mask-group-16.png";
       }
     } else if (themeId === "bg-color-charcoal") {
-      const bgUrl = chrome.runtime.getURL("/themes/bg-color/charcoal/bg.png");
+      var bgUrl = chrome.runtime.getURL("/themes/bg-color/charcoal/bg.png");
       body.style.setProperty("--theme-bg-image", `url('${bgUrl}')`);
       if (document.querySelector(".sidebar__user-avatar-hat-bg")) {
-        document.querySelector(".sidebar__user-avatar-hat-bg").src = "https://i.ibb.co/YBF6TqZ0/Mask-group-19.png";
+        document.querySelector(".sidebar__user-avatar-hat-bg").src = "https://hc-cdn.hel1.your-objectstorage.com/s/v3/d6258e630f490ea0_mask.png";
       }
     }
   }
