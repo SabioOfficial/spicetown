@@ -134,7 +134,7 @@
   border-radius: 16px;
   box-shadow: var(--shadow);
   background-color: var(--color-tan-400);
-  background-image: linear-gradient(rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05)), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05));
+  background-image: var(--accent-image, linear-gradient(rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05)), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05)));
   background-size: 60px 60px;
   cursor: pointer;
   transition: all 150ms ease;
@@ -568,6 +568,39 @@
   --projects-show-timeline-url: url('data:image/svg+xml,<svg width="8" height="90" viewBox="0 0 4 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="4" height="30" rx="2" fill="%23b88bee"/></svg>');
 }
 
+/** Charcoal THEME **/
+
+[data-theme="bg-color-charcoal"] {
+  --bg-primary: #353535;
+  --text-primary: #e0e3f1;
+  --text-highlight: #d1d6e9;
+
+  --surface-header: #8f8f8f;
+  --surface-header-backdrop: #aeaeae;
+  --surface-card: #6e738d;
+  --surface-dark: #363a4f;
+
+  --accent: #727272;
+  --accent-darker: #242424;
+  --border-color: #121212;
+  --accent-muted: #b4b4b4;
+  --accent-semi-transparent: hsla(0, 0%, 93%, 0.3);
+
+  --kitchen-bar-border: #727272;
+  --kitchen-bar-bg: #242424;
+  --kitchen-gradient: linear-gradient(90deg, #8c8c8c 0%, #d7d7d7 100%);
+
+  --input-main-bg: #aeaeae;
+  --input-sub-bg: #8f8f8f;
+  --input-sub-text: #b8c0e0;
+
+  --create-project-url: url("https://hc-cdn.hel1.your-objectstorage.com/s/v3/dd434c974c09b148_outline.png");
+  --projects-show-timeline-url: ursl('data:image/svg+xml,<svg width="8" height="90" viewBox="0 0 4 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="4" height="30" rx="2" fill="%23b88bee"/></svg>');
+
+  --accent-image : url("https://hc-cdn.hel1.your-objectstorage.com/s/v3/cb0b4ddb0ba5d286_texture.png");
+  --star-color : #aeaeae;
+}
+
 [data-theme] {
   background-color: var(--bg-primary) !important;
   color: var(--text-primary) !important;
@@ -580,6 +613,7 @@
 [data-theme] .sidebar__user-avatar {background-color: var(--accent-darker) !important;}
 [data-theme] .sidebar__user-name {background-color: var(--accent-darker) !important;}
 [data-theme] .sidebar__blob {background-color: var(--accent-darker) !important;}
+[data-theme] .sidebar__blob {background-image: var(--accent-image, linear-gradient(rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05)), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05))) !important;}
 [data-theme] .sidebar__nav-link--active::before {background-color: var(--accent) !important;}
 [data-theme] .sidebar__nav-link--active > .sidebar__nav-icon-wrapper {background: var(--accent-darker) !important;}
 
@@ -779,7 +813,7 @@
 }
 [data-theme] .shop-item-card::before {
   background-color: var(--accent-darker) !important;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05)), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05));
+  background-image: var(--accent-image, linear-gradient(rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05)), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05))) !important;
   background-size: 100px 100px;
 }
 [data-theme] .shop-item-card .shop-item-card__image {background-color: var(--border-color) !important;}
@@ -797,6 +831,7 @@
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-darker) 100%) !important;
   border-color: var(--border-color) !important;
 }
+[data-theme] .shop-goals__item {background: linear-gradient(135deg, var(--accent-muted, --color-yellow-300) 100%) !important;}
 [data-theme] .user-profile .user-profile__card {
   background-color: var(--surface-dark) !important;
 }
