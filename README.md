@@ -171,6 +171,13 @@
     <td>Yes</td>
     <td>None</td>
   </tr>
+  <tr>
+    <td>Charcoal</td>
+    <td>Gray</td>
+    <td>TBD <small>(In-dev 23/12/25)</small></td>
+    <td>Yes</td>
+    <td>None</td>
+  </tr>
 </table>
 
 <h3 id="implementing-themes">Implementing Themes</h3>
@@ -186,7 +193,10 @@
 <p><b>Catppuccin Mocha</b> is the first Catppuccin theme to be added. It is the second theme added to <b>Spicetown</b> after Ruby. It uses a Lavender-based design.</p>
 
 <h4 id="themes-catppuccin-macchiato">Catppuccin <small>Macchiato</small></h4>
-<p><b>Catpuccin Macchiato</b> is the second Catppuccin theme to be addded. It is the third theme added to <b>Spicetown</b> after Catppuccin <small>Macchiato</small>. Because of Neon, one of the Flavortown dev's "request", this theme uses a Mauve design. This theme is a work in progress.</p>
+<p><b>Catpuccin Macchiato</b> is the second Catppuccin theme to be addded. It is the third theme added to <b>Spicetown</b> after Catppuccin <small>Mocha</small>. Because of Neon, one of the Flavortown dev's "request", this theme uses a Mauve design. This theme is a work in progress.</p>
+
+<h4 id="themes-charcoal">Charcoal</h4>
+<p><b>Charcoal</b> is the fourth theme added to <b>Spicetown</b> after Catppuccin <small>Macchiato</small>. Originally the theme would have everything on fire, but looked too much like a halloween theme than anything. Until more projects ship so I can test voting css, this is a work in progress.</p>
 
 <h2 id="improvements">Improvements</h2>
 <p>Spicetown regularly makes improvements to existing Flavortown features. These improvements mostly either improves the UI or adds hidden, scrapped Flavortown functionalities back into Flavortown.</p>
