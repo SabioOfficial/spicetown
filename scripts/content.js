@@ -1,7 +1,14 @@
-let apiKey = "Wait! We're trying to obtain the API Key for you..."
+let apiKey = "";
 const savedBgColor = localStorage.getItem("bg-color-theme");
 
-function initialize() {
+function refreshApiKey() {
+  const apiKeyDisplay = document.querySelector(".api-key-display");
+  if (apiKeyDisplay) {
+    apiKey = apiKeyDisplay.textContent.trim();
+  }
+}
+
+async function initialize() {
   const topCollabDiv = document.querySelector(".top-collab img");
   if (topCollabDiv) {
     const spicetownIcon = document.createElement("img");
@@ -31,6 +38,8 @@ function initialize() {
   if (savedBgColor) {
     applyTheme(savedBgColor);
   }
+
+  refreshApiKey();
 }
 
 function addImprovedUI() {
@@ -543,66 +552,135 @@ function addImprovedShop() {
   });
 }
 
-// let allProjects = [];
+let allProjects = [];
 
-// async function addProjectSearcher() {
-//   const explorePageContainer = document.querySelector(".explore");
-//   const projectList = document.querySelector("#project-list");
-//   if (!explorePageContainer || !projectList) return;
+async function addProjectSearcher() {
+  const explorePageContainer = document.querySelector(".explore");
+  const projectList = document.querySelector("#project-list");
 
-//   const searchInput = document.createElement("input");
-//   searchInput.placeholder = "Search project";
-//   searchInput.classList.add("project-list__searcher", "input__field");
-//   explorePageContainer.insertBefore(searchInput, explorePageContainer.querySelector(".explore__projects-list"));
+  if (!explorePageContainer || !projectList || document.querySelector(".project-list__searcher")) return;
 
-//   const API_KEY = "something something";
+  const searchContainer = document.createElement("div");
+  searchContainer.classList.add("project-list__search-container");
 
-//   try {
-//     const response = await fetch("https://flavortown.hackclub.com/api/v1/projects", {
-//       method: 'GET',
-//       headers: {
-//         'Authorization': `Bearer ${API_KEY}`,
-//         'Accept': 'application/json'
-//       }
-//     });
-//     console.log(response);
-//     allProjects = await response.json();
-//   } catch (err) {console.error("bruh i couldnt fetch the fucking projects wtf flavortown: ", err)}
+  const searchInput = document.createElement("input");
+  searchInput.placeholder = "Search project";
+  searchInput.classList.add("project-list__searcher", "input__field");
 
-//   searchInput.addEventListener("input", (e) => {
-//     const query = e.target.value.toLowerCase();
+  const searchBtn = document.createElement("button");
+  searchBtn.classList.add("project-list__search-btn");
+  searchBtn.innerHTML = `<svg width="24" height="24" viewBox="0 0 40 40" fill="none"><path d="M39.0527 34.2126L29.8565 25.0156C31.419 22.5281 32.3258 19.5879 32.3258 16.4326C32.3258 7.50574 25.0891 0.27002 16.1626 0.27002C7.23605 0.27002 0 7.50574 0 16.4326C0 25.3598 7.23571 32.5948 16.1626 32.5948C19.5964 32.5948 22.777 31.5213 25.3942 29.6971L34.481 38.7846C35.1124 39.4154 35.9402 39.7295 36.7669 39.7295C37.5946 39.7295 38.4213 39.4154 39.0537 38.7846C40.3155 37.5215 40.3155 35.4754 39.0527 34.2126ZM16.1626 27.3584C10.1291 27.3584 5.23745 22.4671 5.23745 16.4333C5.23745 10.3994 10.1291 5.50781 16.1626 5.50781C22.1964 5.50781 27.0877 10.3994 27.0877 16.4333C27.0877 22.4671 22.1964 27.3584 16.1626 27.3584Z" fill="#7A4841"></path></svg>`;
 
-//     const filtered = allProjects.filter(project => {
-//       const titleMatch = project.title?.toLowerCase().includes(query);
-//       const descMatch = project.description?.toLowerCase().includes(query);
-//       return titleMatch || descMatch;
-//     });
+  searchContainer.appendChild(searchInput);
+  searchContainer.appendChild(searchBtn);
 
-//     if (filtered.length === 0) {
-//       projectList.innerHTML = `<p class="explore__end">You've reached the end.</p>`
-//       return;
-//     }
+  const insertionPoint = explorePageContainer.querySelector(".explore__projects-list") || projectList;
+  explorePageContainer.insertBefore(searchContainer, insertionPoint);
 
-//     container.innerHTML = filtered.map(filteredProj => `
-//       <div id="project_${filteredProj.id}" class="project-card">
-//         <div class="project-card__banner ${!filteredProj.banner_url ? 'project-card__banner--placeholder' : ''}">
-//           <a class="project-card__banner-frame" href="/projects/${filteredProj.id}">
-//             ${filteredProj.banner_url 
-//               ? `<img src="${filteredProj.banner_url}" class="project-card__banner-image" alt="${filteredProj.title}">`
-//               : `<div class="project-card__banner-placeholder"><p>No banner yet</p></div>`
-//             }
-//           </a>
-//         </div>
-//         <div class="project-card__content">
-//           <h3 class="project-card__title">
-//             <a class="project-card__title-link" href="/projects/${filteredProj.id}">${filteredProj.title}</a>
-//           </h3>
-//           <p class="project-card__description">${filteredProj.description || ''}</p>
-//         </div>
-//       </div>
-//     `).join('');
-//   });
-// }
+  let currentPage = 1;
+
+  const handleSearch = async (append = false) => {
+    if (!append) {
+      currentPage = 1;
+      projectList.innerHTML = '<p class="explore__end">Searching Flavortown...</p>';
+    }
+
+    try {
+      const API_KEY = apiKey;
+
+      const query = encodeURIComponent(searchInput.value);
+      const response = await fetch(`https://flavortown.hackclub.com/api/v1/projects?query=${query}&page=${currentPage}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${API_KEY}`,
+          'Accept': 'application/json'
+        }
+      });
+      
+      const data = await response.json();
+
+      if (data.error === "rate_limited") {
+        const endMsg = document.querySelector(".explore__end");
+        if (endMsg) endMsg.textContent = "Rate limited. Wait 1 min.";
+        return;
+      }
+
+      renderProjects(data.projects, append);
+      updatePaginationUI(data.pagination);
+    } catch (err) {
+      console.error("i failed to fetch shit FAAHHHHH: ", err);
+    }
+  };
+
+  function updatePaginationUI(paginationData) {
+    let paginationContainer = document.querySelector(".explore__pagination");
+
+    if (!paginationContainer) {
+      paginationContainer = document.createElement('div');
+      paginationContainer.className = 'explore__pagination';
+      projectList.after(paginationContainer);
+    }
+
+    if (paginationData.next_page) {
+      paginationContainer.innerHTML = `
+        <button type="button" class="btn btn--brown" id="ext-load-more">
+          Load More Projects
+        </button>
+      `;
+      
+      document.getElementById("ext-load-more").addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation(); 
+        
+        currentPage = paginationData.next_page;
+        handleSearch(true); 
+      });
+    } else {
+      paginationContainer.innerHTML = `<p class="explore__end">You've reached the end.</p>`;
+    }
+  }
+
+  function renderProjects(projects, append) {
+    if (!projects || projects.length === 0) {
+      if (!append) projectList.innerHTML = `<p class="explore__end">No projects found.</p>`;
+      return;
+    }
+
+    const html = projects.map(project => `
+      <div id="project_${project.id}" class="project-card">
+        <div class="project-card__banner ${!project.banner_url ? 'project-card__banner--placeholder' : ''}">
+          <a class="project-card__banner-frame" href="/projects/${project.id}">
+            ${project.banner_url
+              ? `<img src="${project.banner_url}" class="project-card__banner-image" alt="${project.title}">`
+              : `<div class="project-card__banner-placeholder"><p>Banners are not supported in the API yet</p></div>`
+            }
+          </a>
+        </div>
+        <div class="project-card__content">
+          <h3 class="project-card__title">
+            <a class="project-card__title-link" href="/projects/${project.id}">${project.title}</a>
+          </h3>
+          <p class="project-card__description">${project.description || ''}</p>
+        </div>
+      </div>
+    `).join('');
+
+    if (append) {
+      const statusMsg = projectList.querySelector(".explore__end");
+      if (statusMsg) statusMsg.remove();
+      projectList.insertAdjacentHTML('beforeend', html);
+    } else {
+      projectList.innerHTML = html;
+    }
+  }
+
+  searchBtn.addEventListener("click", () => handleSearch(false));
+  searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") handleSearch(false);
+  });
+}
+
+addProjectSearcher();
 
 function addAchievementInfo() {
   const achievementGridDiv = document.querySelector(".achievements__grid");
@@ -1008,7 +1086,6 @@ function applySettingsSync() {
 
       if (apiKeyDisplay) {
         let censoredA = true;
-        apiKey = apiKeyDisplay.textContent;
 
         initializeCensor(apiKeyDisplay);
         apiKeyDisplay.textContent = str_rand(6); // haha funny number

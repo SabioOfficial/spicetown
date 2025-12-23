@@ -492,8 +492,21 @@
   transform: none;
 }
 
-.project-list__searcher {
+.project-list__search-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
   margin: 2rem 0;
+}
+.project-list__search-btn {
+  padding: var(--space-m) var(--space-m);
+  border-radius: calc(var(--border-radius) * .8);
+  border: none;
+  cursor: pointer;
+  background-color: var(--color-bg);
+}
+.explore__end {
+  font-size: 2rem;
 }
 
 /* .user-profile__achievements {
