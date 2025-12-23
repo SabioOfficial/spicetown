@@ -195,17 +195,33 @@ function addExtraProjectInfo() {
     const followersPerDay = followers / earliestDevlogTime;
     const followersPerDayDiv = document.createElement("div");
     followersPerDayDiv.classList.add("project-extra-info__container");
-    // TODO: Make custom icon
     followersPerDayDiv.innerHTML = `
       <svg width="32" height="32" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: var(--color-tan-400)">
-        <path d="M190.5 381C295.683 381 381 295.683 381 190.5C381 85.3166 295.683 0 190.5 0C85.3166 0 0 85.3166 0 190.5C0 295.683 85.3166 381 190.5 381ZM176.892 81.643C176.892 74.1588 183.016 68.0355 190.5 68.0355C197.984 68.0355 204.108 74.1588 204.108 81.643V183.969L267.041 234.315C272.892 239.01 273.844 247.582 269.149 253.433C267.879 255.028 266.265 256.316 264.427 257.199C262.589 258.083 260.575 258.54 258.536 258.536C255.542 258.536 252.548 257.583 250.031 255.542L181.996 201.114C178.798 198.528 176.894 194.651 176.894 190.5L176.892 81.643Z" fill="currentColor"/>
+        <path d="M155.5 0C104.054 0 62.2 41.8723 62.2 93.3398C62.2 144.807 104.054 186.68 155.5 186.68C206.946 186.68 248.8 144.807 248.8 93.3398C248.8 41.8723 206.946 0 155.5 0ZM271.583 247.658C246.04 221.711 212.177 207.422 176.233 207.422H134.767C98.8234 207.422 64.9603 221.711 39.4168 247.658C13.9985 273.478 0 307.56 0 343.629C0 349.357 4.6415 354 10.3667 354H300.633C306.358 354 311 349.357 311 343.629C311 307.56 297.002 273.478 271.583 247.658Z" fill="currentColor"/>
         <path d="M336.014 402.2C336.004 403.063 336 403.936 336 404.821V449.979C336 459.357 336.492 467.466 338.005 474.275C339.539 481.18 342.234 487.251 346.991 492.009C351.749 496.766 357.82 499.461 364.725 500.995C371.534 502.509 379.643 503 389.021 503H450.979C460.357 503 468.466 502.509 475.275 500.995C482.18 499.461 488.251 496.766 493.009 492.009C497.766 487.251 500.461 481.18 501.995 474.275C503.509 467.466 504 459.357 504 449.979V404.821C504 403.936 503.996 403.063 503.987 402.2H336.014Z" fill="currentColor"/>
         <path d="M361.199 354.715V343.4C361.199 338.761 364.96 335 369.599 335C374.238 335 377.999 338.761 377.999 343.4V352.092C381.453 351.885 385.127 351.8 389.02 351.8H450.978C454.872 351.8 458.546 351.885 461.999 352.092V343.4C461.999 338.761 465.76 335 470.399 335C475.038 335 478.799 338.761 478.799 343.4V354.715C484.252 356.339 489.077 358.861 493.008 362.791C497.766 367.549 500.46 373.62 501.994 380.525C502.34 382.082 502.633 383.707 502.879 385.4H337.12C337.365 383.707 337.658 382.082 338.004 380.525C339.538 373.62 342.233 367.549 346.99 362.791C350.921 358.861 355.747 356.339 361.199 354.715Z" fill="currentColor"/>
       </svg>
       <p>${Math.round((followersPerDay + Number.EPSILON) * 100) / 100} follower(s) a day <span class="project-extra-info__rating" id="followers-per-day-span">(?)</span></p>
     `
     projectExtraInfoDiv.appendChild(followersPerDayDiv);
-    // TODO: Add rating for ts
+    const followersPerDaySpan = document.getElementById("followers-per-day-span");
+    if (!followersPerDaySpan) return;
+    if (followersPerDay < .1) {
+      followersPerDaySpan.textContent = "(Awful)";
+      followersPerDaySpan.classList.add("project-extra-info__rating--awful");
+    } else if (followersPerDay < .2) {
+      followersPerDaySpan.textContent = "(Bad)";
+      followersPerDaySpan.classList.add("project-extra-info__rating--bad");
+    } else if (followersPerDay < .3) {
+      followersPerDaySpan.textContent = "(Okay)";
+      followersPerDaySpan.classList.add("project-extra-info__rating--okay");
+    } else if (followersPerDay < .5) {
+      followersPerDaySpan.textContent = "(Good)";
+      followersPerDaySpan.classList.add("project-extra-info__rating--good");
+    } else if (followersPerDay >= .5) {
+      followersPerDaySpan.textContent = "(Great)";
+      followersPerDaySpan.classList.add("project-extra-info__rating--great");
+    }
   }
 }
 
@@ -238,17 +254,14 @@ function addImprovedShop() {
   allProgressWrapper.classList.add("shop-goals__all-progress-wrapper");
 
   allProgressWrapper.innerHTML = `
+    <span id="all-percent">0.00%</span>
     <div class="shop-goals__heading-progress-bar">
       <div class="shop-goals__heading-progress-bar-fill"></div>
     </div>
-    <div class="shop-goals__all-stats">
+    <div class="all-current__container">
       <span id="all-current">0</span> / <span id="all-total">0</span> 
     </div>
   `;
-
-  const allFill = allProgressWrapper.querySelector(".shop-goals__heading-progress-bar-fill");
-  const allCurrentText = allProgressWrapper.querySelector("#all-current");
-  const allTotalText = allProgressWrapper.querySelector("#all-total");
 
   const shopGoalEditorDiv = document.createElement("div");
   shopGoalEditorDiv.classList.add("shop-goals-editor__div");
@@ -278,6 +291,7 @@ function addImprovedShop() {
     const allFill = document.querySelector(".shop-goals__heading-progress-bar-fill");
     const allCurrentText = document.querySelector("#all-current");
     const allTotalText = document.querySelector("#all-total");
+    const allPercentText = document.querySelector("#all-percent");
 
     for (const item of shopGoalsItems) {
       const id = item.getAttribute("data-item-id");
@@ -315,6 +329,7 @@ function addImprovedShop() {
     if (allFill) allFill.style.width = `${percent}%`;
     if (allCurrentText) allCurrentText.textContent = Math.floor(userBalance).toLocaleString();
     if (allTotalText) allTotalText.textContent = Math.floor(totalRequiredCost).toLocaleString();
+    if (allPercentText) allPercentText.textContent = (Math.round((percent + Number.EPSILON) * 100) / 100).toLocaleString() + "%";
   }
 
   shopGoalsItems.forEach(shopGoalItemDiv => {
@@ -351,15 +366,26 @@ function addImprovedShop() {
       const newRemaining = Math.max(0, newTotalRequired - userBalance);
       const newPercent = Math.min(100, (userBalance / newTotalRequired) * 100);
 
-      if (newRemaining <= 0) {
-        shopGoalsProgressTxt.textContent = `✅ Ready to buy!`;
-        shopGoalsProgressBarFill.classList.add("shop-goals__progress-fill--complete");
+      const progressBarContainer = shopGoalItemDiv.querySelector(".shop-goals__progress-bar");
+      if (progressBarContainer) progressBarContainer.style.display = "none";
+
+      const fillColor = newPercent >= 100 ? "hsl(142, 71%, 59%)" : "var(--color-yellow-400)";
+      const emptyColor = "rgba(255, 255, 255, 0.5)";
+
+      shopGoalItemDiv.style.background = `linear-gradient(to right, ${fillColor} ${newPercent}%, ${emptyColor} ${newPercent}%)`;
+      if (newPercent >= 100) {
+        shopGoalItemDiv.querySelector(".shop-goals__image").classList.add("completed");
       } else {
-        shopGoalsProgressTxt.textContent = `🍪${newRemaining.toLocaleString()} more needed`;
-        shopGoalsProgressBarFill.classList.remove("shop-goals__progress-fill--complete");
+        shopGoalItemDiv.querySelector(".shop-goals__image").classList.remove("completed");
       }
 
-      shopGoalsProgressBarFill.style.width = `${newPercent}%`;
+      if (newRemaining <= 0) {
+        shopGoalsProgressTxt.textContent = `✅ Ready to buy!`;
+        shopGoalItemDiv.classList.add("shop-goals__progress-fill--complete");
+      } else {
+        shopGoalsProgressTxt.textContent = `🍪${newRemaining.toLocaleString()} more needed`;
+        shopGoalItemDiv.classList.remove("shop-goals__progress-fill--complete");
+      }
     }
 
     chrome.storage.local.get([`shop_goal_qty_${shopGoalItemID}`], result => {

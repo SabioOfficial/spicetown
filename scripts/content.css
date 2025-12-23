@@ -303,7 +303,7 @@
   height: 1rem !important;
   clear: both;
   border-radius: 6px !important;
-  background: rgba(0, 0, 0, 0.2) !important;
+  background: rgba(255, 255, 255, 0.7) !important;
   overflow: hidden;
 }
 .shop-goals__heading-progress-bar-fill {
@@ -324,7 +324,7 @@
   flex-direction: column;
 }
 .shop-goals__item {
-  background: linear-gradient(135deg, var(--color-yellow-300) 0%, var(--color-yellow-400) 100%) !important;
+  /* background: linear-gradient(135deg, var(--color-yellow-300) 0%, var(--color-yellow-400) 100%) !important; */
   max-width: 100% !important;
   transition: all 150ms ease;
 }
@@ -332,11 +332,15 @@
   transform: scale(1.05) rotate(2.5deg);
 }
 .shop-goals__item:active {
+  transition: all 20ms ease;
   transform: scale(0.95) rotate(0deg);
 }
 .shop-goals__image {
   background-color: var(--color-yellow-450) !important;
   padding: .25rem !important;
+}
+.completed.shop-goals__image {
+  background-color: hsla(142, 71%, 45%) !important;
 }
 .shop-goals-editor__div {
   flex-grow: 1;
