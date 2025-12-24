@@ -5,11 +5,16 @@ export default [
     languageOptions: {
       sourceType: "module",
       globals: {
-        window: "readonly",
-        document: "readonly",
         chrome: "readonly",
         browser: "readonly",
+        window: "readonly",
+        document: "readonly",
         console: "readonly",
+        localStorage: "readonly",
+        fetch: "readonly",
+        navigator: "readonly",
+        location: "readonly",
+        DOMParser: "readonly",
         setTimeout: "readonly",
         setInterval: "readonly"
       }
