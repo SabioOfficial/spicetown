@@ -2,13 +2,15 @@
   --color-orange-400: oklch(75% 0.183 55.934);
   --color-orange-500: oklch(70.5% 0.213 47.604);
 }
-
+.spicetown-icon-header {
+  height: 45px;
+  width: auto;
+}
 .api-key-display-secure {
   filter: blur(0px) !important;
   transition: none !important;
   cursor: pointer !important;
 }
-
 .api-key-display-censored {
   background: black !important;
   color: black !important;

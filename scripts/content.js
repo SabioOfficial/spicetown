@@ -1,44 +1,48 @@
+/** VARIABLES **/
 let apiKey = "";
 const savedBgColor = localStorage.getItem("bg-color-theme");
 
 function refreshApiKey() {
-  const apiKeyDisplay = document.querySelector(".api-key-display");
-  if (apiKeyDisplay) {
-    apiKey = apiKeyDisplay.textContent.trim();
-  }
+  const apiKeyEl = document.querySelector(".api-key-display");
+  apiKey = apiKeyEl?.textContent?.trim() ?? "";
 }
 
 async function initialize() {
   const topCollabDiv = document.querySelector(".top-collab img");
   if (topCollabDiv) {
-    const spicetownIcon = document.createElement("img");
-    spicetownIcon.src = chrome.runtime.getURL("/images/hc-gh&st-collab.png");
-    spicetownIcon.style.height = "45px";
-    spicetownIcon.style.width = "auto";
-
-    topCollabDiv.insertAdjacentElement("afterend", spicetownIcon);
+    const spicetownIcon = Object.assign(document.createElement("img"), {
+      src: chrome.runtime.getURL("/images/hc-gh&st-collab.png"),
+      className: "spicetown-icon-header",
+    })
+    spicetownIcon.after(spicetownIcon);
   }
 
-  // settings related
-  addSpicetownSettings(); // must go BEFORE applySettingsSync()
+  // Settings-related functions
+  addSpicetownSettings();
   applySettingsSync();
   applyUISync();
 
-  // non settings related
-  addImprovedUI();
-  addExtraProjectInfo();
-  addImprovedShop();
-  addProjectSearcher();
-  addAchievementInfo();
-  addThemesPage();
-  addBannerTemplateHint();
+  // UI Enhancements
+  const uiEnhancements = [
+    addImprovedUI,
+    addExtraProjectInfo,
+    addImprovedShop,
+    addProjectSearcher,
+    addAchievementInfo,
+    addThemesPage,
+    addBannerTemplateHint
+  ];
+  uiEnhancements.forEach(func => func());
 
+  // Display Incompatiability
   incompatiability();
 
+  // Apply Theme
   if (savedBgColor) {
     applyTheme(savedBgColor);
   }
 
+  // Grab The Api Key
   refreshApiKey();
 }
 
