@@ -756,13 +756,13 @@ function addAchievementInfo() {
     "Cookbook Author": "Post 10 devlogs",
     "Scrapbook usage?!": "Use scrapbook in a devlog",
     "Cooking": "Get 'fire' project status, given out by Flavortown devs",
-    "Accept cookies": "Spam the cookie ? amount of times."
+    "Accept cookies": "Spam the cookie"
   };
   const secretMap = {
     "15": {name: "Cookbook Author", desc: "Post 10 devlogs", reward: "15"},
     "16": {name: "Scrapbook usage?!", desc: "Use scrapbook in a devlog"},
     "17": {name: "Cooking", desc: "Get 'fire' project status, given out by Flavortown devs", reward: "5"},
-    "18": {name: "Accept cookies", desc: "Spam the cookie for a certain amount."} // isnt in fucking source code :(
+    "18": {name: "Accept cookies", desc: "Spam the cookie"} // isnt in fucking source code :(
   };
   const achievementCards = achievementGridDiv.querySelectorAll(".achievements__card");
   achievementCards.forEach((achievementCard, index) => {
