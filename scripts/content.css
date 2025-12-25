@@ -636,6 +636,7 @@
 
   --accent-image : url("https://hc-cdn.hel1.your-objectstorage.com/s/v3/cb0b4ddb0ba5d286_texture.png");
   --star-color: #b9d4ff;
+  --music-player-bg: var(--accent)
 }
 
 [data-theme] {
@@ -941,4 +942,10 @@
   border-color: var(--border-color);
   background-color: var(--bg-primary);
   color: var(--accent);
+}
+[data-theme] .music-player__play-pause{
+  background: var(--music-player-bg, var(--color-brown-700));
+}
+[data-theme] .music-player__volume{
+  background: var(--music-player-bg, var(--color-brown-700));
 }
