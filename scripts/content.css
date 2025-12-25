@@ -193,6 +193,10 @@
   transform: translateX(0%) !important;
 }
 
+.project-card {
+  transition: all 150ms ease;
+}
+
 .project-extra-info__div {
   display: flex;
   flex-direction: column;
@@ -637,6 +641,36 @@
   --accent-image : url("https://hc-cdn.hel1.your-objectstorage.com/s/v3/cb0b4ddb0ba5d286_texture.png");
   --star-color: #b9d4ff;
   --music-player-bg: var(--accent)
+}
+
+/** Leafy THEME **/
+
+[data-theme="bg-color-leafy"] {
+  --bg-primary: #012900;
+  --text-primary: #ffffff;
+  --text-highlight: #a2eea8;
+
+  --surface-header: #438f43;
+  --surface-header-backdrop: #62a854;
+  --surface-card: #2c8a38;
+  --surface-dark: #15551a;
+
+  --accent: #096b00;
+  --accent-darker: #012700;
+  --border-color: #001300;
+  --accent-muted: #64b46b;
+  --accent-semi-transparent: hsla(125, 67%, 68%, 0.3);
+
+  --kitchen-bar-border: #2f703a;
+  --kitchen-bar-bg: #0c2b0c;
+  --kitchen-gradient: linear-gradient(90deg, #4e8d45 0%, #75d369 100%);
+
+  --input-main-bg: #5faa58;
+  --input-sub-bg: #488d48;
+  --input-sub-text: #a3d19c;
+
+  --create-project-url: url("https://i.ibb.co/5WTFDMMT/Mask-group-22.png");
+  --projects-show-timeline-url: url('data:image/svg+xml,<svg width="8" height="90" viewBox="0 0 4 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="4" height="30" rx="2" fill="%23096b00"/></svg>');
 }
 
 [data-theme] {

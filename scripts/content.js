@@ -598,9 +598,10 @@ async function addProjectSearcher() {
       
       const data = await response.json();
 
-      if (data.error === "rate_limited") {
+      if (data.error === "rate_limited" || data.error === "unauthorized") {
         const endMsg = document.querySelector(".explore__end");
-        if (endMsg) endMsg.textContent = "Rate limited. Wait 1 min.";
+        if (!endMsg) return;
+        if (data.error === "rate_limited") endMsg.textContent = "Rate limited. Wait 1 min."; else if (data.error === "unauthorized") endMsg.textContent = "Generate an API key from Settings.";
         return;
       }
 
@@ -702,10 +703,10 @@ function addAchievementInfo() {
     "Accept cookies": "Spam the cookie ? amount of times."
   };
   const secretMap = {
-    "12": {name: "Cookbook Author", desc: "Post 10 devlogs", reward: "15"},
-    "13": {name: "Scrapbook usage?!", desc: "Use scrapbook in a devlog"},
-    "14": {name: "Cooking", desc: "Get 'fire' project status, given out by Flavortown devs", reward: "5"},
-    "15": {name: "Accept cookies", desc: "Spam the cookie for a certain amount."} // isnt in fucking source code :(
+    "15": {name: "Cookbook Author", desc: "Post 10 devlogs", reward: "15"},
+    "16": {name: "Scrapbook usage?!", desc: "Use scrapbook in a devlog"},
+    "17": {name: "Cooking", desc: "Get 'fire' project status, given out by Flavortown devs", reward: "5"},
+    "18": {name: "Accept cookies", desc: "Spam the cookie for a certain amount."} // isnt in fucking source code :(
   };
   const achievementCards = achievementGridDiv.querySelectorAll(".achievements__card");
   achievementCards.forEach((achievementCard, index) => {
@@ -969,6 +970,9 @@ async function addThemesPage() {
             <div class="themes__div-option themes__div-option--bg-color" name="bg-color-option" id="bg-color-charcoal">
               <p class="themes__div-option-name">Charcoal <small>(by Aperaine)</small></p>
             </div>
+            <div class="themes__div-option themes__div-option--bg-color" name="bg-color-option" id="bg-color-leafy">
+              <p class="themes__div-option-name">Leafy</p>
+            </div>
           <div>
         </div>
       </div>
@@ -1032,6 +1036,11 @@ function applyTheme(themeId) {
       body.style.setProperty("--theme-bg-image", `url('${bgUrl}')`);
       if (document.querySelector(".sidebar__user-avatar-hat-bg")) {
         document.querySelector(".sidebar__user-avatar-hat-bg").src = "https://hc-cdn.hel1.your-objectstorage.com/s/v3/d6258e630f490ea0_mask.png";
+      }
+    } else if (themeId === "bg-color-leafy") {
+      body.style.setProperty("--theme-bg-image", `url('https://i.ibb.co/qFNQLtjq/Mask-group-21.png')`);
+      if (document.querySelector(".sidebar__user-avatar-hat-bg")) {
+        document.querySelector(".sidebar__user-avatar-hat-bg").src = "https://i.ibb.co/S7wr4DvT/Mask-group-20.png";
       }
     }
   }
