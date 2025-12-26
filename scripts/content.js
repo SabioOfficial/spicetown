@@ -24,6 +24,7 @@ async function initialize() {
 
   // UI Enhancements
   const uiEnhancements = [
+    addDevlogImprovement,
     addProjectSearcher,
     addImprovedUI,
     addExtraProjectInfo,
@@ -45,6 +46,88 @@ async function initialize() {
 
   // Grab The Api Key
   refreshApiKey();
+}
+
+function addDevlogImprovement() {
+  const devlogTextContainer = document.querySelector('.input.input--red > .input__field.input__field--textarea');
+  if (!devlogTextContainer) return;
+
+  const devlogMdActions = document.createElement('div');
+  devlogMdActions.classList.add('input__actions-container');
+  devlogMdActions.innerHTML = `
+    <button data-md="italic" title="Italic">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" x2="10" y1="4" y2="4"/><line x1="14" x2="5" y1="20" y2="20"/><line x1="15" x2="9" y1="4" y2="20"/></svg>
+    </button>
+    <button data-md="bold" title="Bold">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12h9a4 4 0 0 1 0 8H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h7a4 4 0 0 1 0 8"/></svg>
+    </button>
+    <button data-md="h1" title="Heading 1">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h8"/><path d="M4 18V6"/><path d="M12 18V6"/><path d="m17 12 3-2v8"/></svg>
+    </button>
+    <button data-md="h2" title="Heading 2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h8"/><path d="M4 18V6"/><path d="M12 18V6"/><path d="M21 18h-4c0-4 4-3 4-6 0-1.5-2-2.5-4-1"/></svg>
+    </button>
+    <button data-md="link" title="Link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+    </button>
+    <button data-md="image" title="Image">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+    </button>
+  `;
+
+  devlogTextContainer.after(devlogMdActions);
+
+  // am too lazy to add it to every single one :P
+  devlogMdActions.addEventListener("click", (e) => {
+    const btnClicked = e.target.closest("button");
+    if (!btnClicked) return;
+
+    e.preventDefault();
+    const mdType = btnClicked.dataset.md; // oh wow i dont have to get attribute :D
+    const [selectStart, selectEnd] = [devlogTextContainer.selectionStart, devlogTextContainer.selectionEnd];
+    const selectedText = devlogTextContainer.value.slice(selectStart, selectEnd);
+    let insertText = "";
+    let newSelectStart = selectStart;
+    let newSelectEnd = selectEnd;
+
+    // first time using switch hope it goes well <3
+    switch (mdType) {
+      case "italic":
+        insertText = selectedText ? `_${selectedText}_` : '_MD Editor by Spicetown_';
+        newSelectStart = selectStart + (selectedText ? 1 : 1);
+        newSelectEnd = selectStart + insertText.length - 1;
+        break;
+      case "bold":
+        insertText = selectedText ? `**${selectedText}**` : '**MD Editor by Spicetown**';
+        newSelectStart = selectStart + (selectedText ? 2 : 2);
+        newSelectEnd = selectStart + insertText.length - 2;
+        break;
+      case "h1":
+        insertText = selectedText ? `# ${selectedText}` : '# MD Editor by Spicetown';
+        newSelectStart = selectStart + (selectedText ? 2 : 2);
+        newSelectEnd = selectStart + insertText.length;
+        break;
+      case "h2":
+        insertText = selectedText ? `## ${selectedText}` : '## MD Editor by Spicetown';
+        newSelectStart = selectStart + (selectedText ? 3 : 3);
+        newSelectEnd = selectStart + insertText.length;
+        break;
+      case "link":
+        insertText = selectedText ? `[${selectedText}](url)` : '[MD Editor by Spicetown](https://spicetown.sabiothedev.xyz)';
+        newSelectStart = selectStart + (selectedText ? selectedText.length + 3 : 7);
+        newSelectEnd = selectStart + 3;
+        break;
+      case "image":
+        insertText = selectedText ? `![${selectedText}](imageurl)` : '![Alt text](https://i.ibb.co/yBhBsGyf/Group-11-1.png)';
+        newSelectStart = selectStart + (selectedText ? selectedText.length + 4 : 8);
+        newSelectEnd = selectStart + 3;
+        break;
+    }
+
+    devlogTextContainer.setRangeText(insertText, selectStart, selectEnd, "end");
+    devlogTextContainer.focus();
+    devlogTextContainer.setSelectionRange(newSelectStart, newSelectEnd);
+  });
 }
 
 function addKeybinds() { // :3

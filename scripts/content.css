@@ -524,6 +524,24 @@
   text-overflow: ellipsis !important;
 }
 
+.input__actions-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  gap: .5rem;
+}
+.input__actions-container > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: var(--color-bg-2);
+}
+
 /* .user-profile__achievements {
   overflow-x: scroll;
 } */
@@ -826,6 +844,7 @@
 [data-theme] .project-extra-info__container > svg {color: var(--text-highlight) !important;}
 [data-theme] .project-show-card__actions > .btn.btn--brown.btn--borderless {color: var(--text-highlight) !important;}
 [data-theme] .projects-show__timeline::before {background-image: var(--projects-show-timeline-url) !important;}
+[data-theme] .input__field.input__field--textarea {background-color: var(--surface-dark) !important; color: var(--text-primary) !important;}
 
 [data-theme] .state-card--success {
   --state-card-accent: var(--accent-darker) !important;
