@@ -14,11 +14,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Zip extension # dont zip .github because .github no cool
-        run: zip -r spicetown-lunar.zip . -x "spicetown-lunar.zip" "*.git*" "*.github*"
+        run: zip -r spicetown-use-this.zip . -x "spicetown-use-this.zip" "*.git*" "*.github*"
       
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with: 
-          name: spicetown-extension
-          path: spicetown-lunar.zip
+          name: spicetown-unzip
+          path: spicetown-use-this.zip
           retention-days: 5
