@@ -845,6 +845,7 @@
 [data-theme] .project-show-card__actions > .btn.btn--brown.btn--borderless {color: var(--text-highlight) !important;}
 [data-theme] .projects-show__timeline::before {background-image: var(--projects-show-timeline-url) !important;}
 [data-theme] .input__field.input__field--textarea {background-color: var(--surface-dark) !important; color: var(--text-primary) !important;}
+[data-theme] .input__actions-container svg {color: var(--text-highlight) !important;}
 
 [data-theme] .state-card--success {
   --state-card-accent: var(--accent-darker) !important;
