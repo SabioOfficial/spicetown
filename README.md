@@ -225,8 +225,6 @@
   </tr>
 </table>
 
-<h3 id="exposed-achievements">Exposed Achievements <small>(Deprecated)</small></h3>
-<p>Exposed Achievements exposes hidden and secret achievements by replacing the "???" title, mysterious description, and "?" cookie reward with the actual ones straight from the source code! Please not that this process is currently <b>not automatic</b>. New achievements will <b>not</b> be exposed immediately without manual input.</p>
 
 <h3 id="voting+">Voting+</h3>
 <p>Voting+ adds the "Skip" button, which refreshes the page and shorterns the "See my previous votes" to "Previous votes".</p>
